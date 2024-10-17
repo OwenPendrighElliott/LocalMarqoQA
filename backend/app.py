@@ -4,7 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 import marqo
 from ai_chat import answer
-from typing import List
 from knowledge_store import MarqoKnowledgeStore
 import document_processors
 from document_processors import (

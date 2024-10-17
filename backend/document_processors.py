@@ -2,6 +2,8 @@ import re
 import nltk
 from typing import List
 
+nltk.download("punkt_tab")
+
 CHUNK_SIZE = 1024
 
 
@@ -64,6 +66,9 @@ def sentence_pair_chunker(text: str) -> List[dict]:
             current_chunk += " " + sentences[i + 1]
             chunks.append({"text": current_chunk.strip()})
             current_chunk = ""
+
+    if not chunks:
+        return [{"text": text}]
 
     return chunks
 

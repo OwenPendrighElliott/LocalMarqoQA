@@ -21,14 +21,7 @@ class MarqoKnowledgeStore:
         self._document_cleaner = document_cleaner
 
         self._index_settings = {
-            "index_defaults": {
-                "model": "hf/all_datasets_v4_MiniLM-L6",
-                "text_preprocessing": {
-                    "split_length": 2,
-                    "split_overlap": 0,
-                    "split_method": "sentence",
-                },
-            }
+            "model": "hf/e5-base-v2",
         }
 
         try:
@@ -49,8 +42,13 @@ class MarqoKnowledgeStore:
     def add_document(self, document):
         if self._document_cleaner is not None:
             document = self._document_cleaner(document)
+
+        print(document)
+        print(self._document_chunker(document))
         self._client.index(self._index_name).add_documents(
-            self._document_chunker(document)
+            self._document_chunker(document),
+            tensor_fields=["text"],
+            client_batch_size=4,
         )
 
     def reset_index(self):

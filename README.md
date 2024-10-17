@@ -26,7 +26,7 @@ npm run dev
 
 You will need to get the models to run this locally. If you have 16GB of RAM I recommend starting with 7B parameter LLaMa GGML models, 13B parameter models do work but you must limit the memory usage of Marqo with Docker and remove the ViT-L/14 model from the pre-loading. 32GB RAM will give you enough headroom for 13B or potentially more.
 
-There are a number of models that are commented out in the code, you can find them on hugging face by searching the name. I recommend starting with [Wizard-Vicuna-7B-Uncensored.ggmlv3.q4_K_M](https://huggingface.co/TheBloke/Wizard-Vicuna-7B-Uncensored-GGML/tree/main).
+There are a number of models that are commented out in the code, you can find them on hugging face by searching the name. I recommend starting with [llama-2-7b-chat.Q4_K_M.gguf](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/tree/main).
 
 Download the model and place it in a new directory `backend/models/7B/`.
 
@@ -52,10 +52,17 @@ nltk.download("all")
 python3 -m flask run --debug -p 5001
 ```
 
-### Marqo
+### Run Marqo
 
-[Follow the getting started guide to run the docker image.](https://docs.marqo.ai/0.0.17/)
+```bash
+docker run --name marqo -it -p 8882:8882 marqoai/marqo:2.12
+```
 
+If you have a GPU then you should add the `--gpus all` flag to the docker run command.
+
+```bash
+docker run --name marqo -it -p 8882:8882 --gpus all marqoai/marqo:2.12
+```
 
 ## Formatting code
 

@@ -39,7 +39,7 @@
   font-size: 14px;
   white-space: pre-line;
   max-width: 97%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .message ol {
